@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "description": "Open API by Flask",
-    "version": "0.0.1",
-    "title": "Flask-Rest-Boilerplate"
+    "version": "0.1.0",
+    "title": "Flask-Rest-Template"
   },
   "servers": [
     {
@@ -12,33 +12,37 @@
   ],
   "tags": [
     {
-      "name": "Book Request",
-      "description": "Example API for requesting and return book requests"
+      "name": "Book",
+      "description": "Example API for requesting and return book"
     }
   ],
   "paths": {
-    "/request": {
+    "/book": {
       "get": {
         "tags": [
-          "Book Request"
+          "Book"
         ],
         "summary": "Returns bookRequests",
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequests"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/bookRequests"
+                }
+              }
             }
           }
         }
       },
       "post": {
         "tags": [
-          "Book Request"
+          "Book"
         ],
-        "summary": "Create a new book request system",
+        "summary": "Create a new book system",
         "requestBody": {
-          "description": "Book Request Post Object",
+          "description": "Book Post Object",
           "required": true,
           "content": {
             "application/json": {
@@ -48,14 +52,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "201": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/id"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
             }
           },
           "400": {
@@ -64,27 +69,29 @@
         }
       }
     },
-    "/request/{id}": {
+    "/book/{book_id}": {
       "parameters": [
         {
-          "name": "id",
+          "name": "book_id",
           "in": "path",
           "required": true,
           "description": "ID of the cat that we want to match",
-          "type": "string"
+          "schema": {
+            "type": "string"
+          }
         }
       ],
       "get": {
         "tags": [
-          "Book Request"
+          "Book"
         ],
-        "summary": "Get book request with given ID",
+        "summary": "Get book with given ID",
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "book_id",
             "required": true,
-            "description": "Book Request id",
+            "description": "Book id",
             "schema": {
               "$ref": "#/components/schemas/id"
             }
@@ -93,36 +100,40 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequest"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/bookRequest"
+                }
+              }
             }
           },
           "400": {
             "description": "Failed. Misunderstood Request."
           },
           "404": {
-            "description": "Failed. Book request not found."
+            "description": "Failed. Book not found."
           }
         }
       },
       "put": {
-        "summary": "edit a book request by ID",
+        "summary": "edit a book by ID",
         "tags": [
-          "Book Request"
+          "Book"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "book_id",
             "required": true,
-            "description": "Book Request id",
+            "description": "Book id",
             "schema": {
               "$ref": "#/components/schemas/id"
             }
           }
         ],
         "requestBody": {
-          "description": "Book Request Object",
+          "description": "Book Object",
           "required": true,
           "content": {
             "application/json": {
@@ -132,14 +143,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequest"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/bookRequest"
+                }
+              }
             }
           },
           "400": {
@@ -148,16 +160,16 @@
         }
       },
       "delete": {
-        "summary": "Delete Book Request by ID",
+        "summary": "Delete Book by ID",
         "tags": [
-          "Book Request"
+          "Book"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "book_id",
             "required": true,
-            "description": "Book Request Id",
+            "description": "Book Id",
             "schema": {
               "$ref": "#/components/schemas/id"
             }
@@ -166,15 +178,19 @@
         "responses": {
           "204": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/id"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
             }
           },
           "400": {
             "description": "Failed. Misunderstood Request."
           },
           "404": {
-            "description": "Failed. Book Request not found."
+            "description": "Failed. Book not found."
           }
         }
       }

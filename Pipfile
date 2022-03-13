@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask_cors = "*"
+flask-swagger-ui = "*"
+flask_restful = "*"
+nose = "*"
+uuid = "*"
+requests = "*"
+validate_email = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+
+[script]

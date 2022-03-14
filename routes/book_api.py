@@ -62,7 +62,7 @@ class BookApi(Resource):
         }
         BOOK_REQUESTS[new_uuid] = book_request
         # HTTP 201 Created
-        return jsonify({"id": new_uuid}), 201
+        return {"id": new_uuid}, 201
 
 
 class BookDetailApi(Resource):
@@ -109,7 +109,7 @@ class BookDetailApi(Resource):
         }
 
         BOOK_REQUESTS[book_id] = book_request
-        return jsonify(BOOK_REQUESTS[book_id]), 200
+        return BOOK_REQUESTS[book_id], 200
 
     @staticmethod
     def delete(book_id):

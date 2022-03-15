@@ -1,15 +1,9 @@
 from datetime import datetime, timedelta
 
 import uuid
-from flask import jsonify, request, Blueprint
+from flask import jsonify, request
 from flask_restful import Resource, abort
 from validate_email import validate_email
-
-
-def get_blueprint():
-    """Return the blueprint for the main app module"""
-    return Blueprint("book_api", __name__, url_prefix="/book")
-
 
 BOOK_REQUESTS = {
     "8c36e86c-13b9-4102-a44f-646015dfd981": {

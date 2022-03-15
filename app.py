@@ -4,7 +4,7 @@ from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 
-from routes import blueprint
+from src.api import blueprint
 
 cors = CORS()
 
@@ -28,33 +28,35 @@ def create_app():
     flask_app.register_blueprint(blueprint=SWAGGER_UI_BLUEPRINT, url_prefix=SWAGGER_URL)
     flask_app.register_blueprint(blueprint=blueprint, url_prefix="/")
 
-    # TODO:以下でも可能か検討する
-    # flask_app.register_blueprint(book_api.get_blueprint())
-
-    @flask_app.errorhandler(400)
-    def handle_400_error(_error):
-        """Return a http 400 error to client"""
-        return make_response(jsonify({"error": "Misunderstood"}), 400)
-
-    @flask_app.errorhandler(401)
-    def handle_401_error(_error):
-        """Return a http 401 error to client"""
-        return make_response(jsonify({"error": "Unauthorised"}), 401)
-
-    @flask_app.errorhandler(404)
-    def handle_404_error(_error):
-        """Return a http 404 error to client"""
-        return make_response(jsonify({"error": "Not found"}), 404)
-
-    @flask_app.errorhandler(500)
-    def handle_500_error(_error):
-        """Return a http 500 error to client"""
-        return make_response(jsonify({"error": "Server error"}), 500)
-
     return flask_app
 
 
 app = create_app()
+
+
+@app.errorhandler(400)
+def handle_400_error(_error):
+    """Return a http 400 error to client"""
+    return make_response(jsonify({"error": "Misunderstood"}), 400)
+
+
+@app.errorhandler(401)
+def handle_401_error(_error):
+    """Return a http 401 error to client"""
+    return make_response(jsonify({"error": "Unauthorised"}), 401)
+
+
+@app.errorhandler(404)
+def handle_404_error(_error):
+    """Return a http 404 error to client"""
+    return make_response(jsonify({"error": "Not found"}), 404)
+
+
+@app.errorhandler(500)
+def handle_500_error(_error):
+    """Return a http 500 error to client"""
+    return make_response(jsonify({"error": "Server error"}), 500)
+
 
 if __name__ == "__main__":
 

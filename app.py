@@ -1,10 +1,12 @@
 import argparse
 
-from flask import Flask, jsonify, make_response
+from flask import Flask, make_response
+from flask import jsonify, Response
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 
 from src.api import blueprint
+from utils.server import AuthError
 
 cors = CORS()
 
@@ -56,6 +58,18 @@ def handle_404_error(_error):
 def handle_500_error(_error):
     """Return a http 500 error to client"""
     return make_response(jsonify({"error": "Server error"}), 500)
+
+
+@app.errorhandler(AuthError)
+def handle_auth_error(ex: AuthError) -> Response:
+    """
+    serializes the given AuthError as json and sets the response status code accordingly.
+    :param ex: an auth error
+    :return: json serialized ex response
+    """
+    response = jsonify(ex.error)
+    response.status_code = ex.status_code
+    return response
 
 
 if __name__ == "__main__":

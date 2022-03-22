@@ -10,6 +10,7 @@ flask-swagger-ui = "*"
 flask_restful = "*"
 nose = "*"
 uuid = "*"
+python-jose="*"
 requests = "*"
 validate_email = "*"
 
